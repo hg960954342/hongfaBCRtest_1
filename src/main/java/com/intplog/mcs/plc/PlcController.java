@@ -107,16 +107,18 @@ public class PlcController {
                         }
                         ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getAddress(),path);
                         if(data1.isSuccess()){
-                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc成功";
+                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功";
                             addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
                             mcsTriggerTaskData.setStatus(10);
                             mcsTriggerTaskData.setCreateTime(date);
                             mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
                             System.out.print(date+"  :  111111F   wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功"+"\n");
                         }
-                        String mcg = "wcs下发分拨口指令到plc失败";
-                        addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
-                        plcDriver.connect=false;
+                        else if(!data1.isSuccess()){
+                            String mcg = "wcs下发分拨口指令到plc失败";
+                            addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
+                            plcDriver.connect=false;
+                        }
                     }
                     else if(StringUtils.isEmpty(jsonData)){
                         continue;
@@ -167,15 +169,18 @@ public class PlcController {
                         }
                         ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getAddress(),path);
                         if(data1.isSuccess()){
-                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc成功";
+                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功";
                             addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
                             mcsTriggerTaskData.setStatus(10);
                             mcsTriggerTaskData.setCreateTime(date);
                             mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
                         }
-                        String mcg = "wcs下发分拨口指令到plc失败";
-                        addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
-                        plcDriver.connect=false;
+                        else if(!data1.isSuccess()){
+                            String mcg = "wcs下发分拨口指令到plc失败";
+                            addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
+                            plcDriver.connect=false;
+                        }
+
                     }
                     else continue;
                 }
@@ -224,15 +229,17 @@ public class PlcController {
                         }
                         ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getAddress(),path);
                         if(data1.isSuccess()){
-                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc成功";
+                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功";
                             addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
                             mcsTriggerTaskData.setStatus(10);
                             mcsTriggerTaskData.setCreateTime(date);
                             mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
                         }
-                        String mcg = "wcs下发分拨口指令到plc失败";
-                        addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
-                        plcDriver.connect=false;
+                        else if(!data1.isSuccess()){
+                            String mcg = "wcs下发分拨口指令到plc失败";
+                            addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
+                            plcDriver.connect=false;
+                        }
                     }
                     else continue;
                 }
@@ -281,15 +288,17 @@ public class PlcController {
                         }
                         ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getAddress(),path);
                         if(data1.isSuccess()){
-                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc成功";
+                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功";
                             addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
                             mcsTriggerTaskData.setStatus(10);
                             mcsTriggerTaskData.setCreateTime(date);
                             mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
                         }
-                        String mcg = "wcs下发分拨口指令到plc失败";
-                        addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
-                        plcDriver.connect=false;
+                        else if(!data1.isSuccess()){
+                            String mcg = "wcs下发分拨口指令到plc失败";
+                            addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
+                            plcDriver.connect=false;
+                        }
                     }
                     else continue;
                 }

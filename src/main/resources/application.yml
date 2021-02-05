@@ -5,8 +5,8 @@ spring:
     password: mcs888!
 #    driver-class-name: org.mariadb.jdbc.Driver
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://192.168.187.20:3306/MCS?useSSL=false&characterEncoding=utf8
-    #url: jdbc:mariadb://20.31.202.14:3306/MCS?useSSL=false&characterEncoding=utf8
+    #url: jdbc:mariadb://192.168.187.20:3306/MCS?useSSL=false&characterEncoding=utf8
+    url: jdbc:mariadb://20.31.202.14:3306/MCS?useSSL=false&characterEncoding=utf8
     #url: jdbc:mariadb://150.158.167.18:1001/MCS?useSSL=false&characterEncoding=utf8
     #url: jdbc:mariadb://192.168.187.20:3306/MCS?useSSL=false&characterEncoding=utf8&allowMultiQueries=true
     type: com.alibaba.druid.pool.DruidDataSource
