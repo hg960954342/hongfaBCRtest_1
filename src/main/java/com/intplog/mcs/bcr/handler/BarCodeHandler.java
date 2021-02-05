@@ -170,7 +170,7 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
             System.out.print(date+" 收到 222222 BarCodeHandler ：" + mcsTriggerTask.getId()+"\n");
             System.out.print(date+" 收到 333333 BarCodeHandler ：" + mcsTriggerTask.getBcrCode()+"\n");
             System.out.print(date+" 收到 444444 BarCodeHandler ：" + mcsTriggerTask.getWeight()+"\n");
-            System.out.print(date+" 收到 555555 BarCodeHandler ：" + mcsTriggerTask+"\n");
+
 
             log.info("收到：" + msg.getId() + "    " + msg.getBarcode());
             McsTriggerTaskService mcsTriggerTaskService = SpringContextUtil.getBean(McsTriggerTaskService.class);
