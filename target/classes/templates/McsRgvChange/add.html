@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/common::head">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" th:text="${McsRgvChange==null}?'添加连接信息':'编辑连接信息'"></div>
+                <div class="layui-card-body" pad15>
+
+                    <input type="hidden" id="_method" value="" th:value="${McsRgvChange==null}?'post':'put'">
+                    <div class="layui-form" lay-filter="ledConnect-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="id" value="" th:readonly="${McsRgvChange!=null}"
+                                       th:value="${McsRgvChange!=null}?${McsRgvChange.getId()}" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux" th:text="${McsRgvChange==null}?'':'不可修改。'"></div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">任务号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="taskId" value="" th:value="${McsRgvChange!=null}?${McsRgvChange.getTaskId()}"
+                                       lay-verify="required"  class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">原层</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="source" value="" th:value="${McsRgvChange!=null}?${McsRgvChange.getSource()}"
+                                       autocomplete="off"  class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">目的层</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="target" value="" th:value="${McsRgvChange!=null}?${McsRgvChange.getTarget()}"
+                                       autocomplete="off"  class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">小车编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="rgvId" value="" th:value="${McsRgvChange!=null}?${McsRgvChange.getRgvId()}"
+                                       autocomplete="off"  class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">提升机编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="hoistId" value="" th:value="${McsRgvChange!=null}?${McsRgvChange.getHoistId()}"
+                                       autocomplete="off"  class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">任务状态</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="status" value="" th:value="${McsRgvChange!=null}?${McsRgvChange.getStatus()}"
+                                       autocomplete="off"  placeholder="请输入名称" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="setmyinfo"
+                                        th:text="${McsRgvChange==null}?'确认添加':'确认修改'">确认修改
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form'], function () {
+        var $ = layui.$
+            , admin = layui.admin
+            , element = layui.element
+            , form = layui.form;
+
+        form.render(null, 'mcsPlcConnect-form');
+        element.render('breadcrumb', 'breadcrumb');
+
+        form.on('submit(setmyinfo)', function (data) {
+            $.ajax({
+                url: "/mcsRgvChangeStoryTask/",
+                type: $('#_method').val(),
+                data: data.field,
+                success: function (data) {
+                    layer.alert(data, {icon: 6});
+                },
+                error: function (err) {	//失败回调函数
+                    layer.alert(err, {icon: 5});
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
