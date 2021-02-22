@@ -101,7 +101,7 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                     mcsTriggerTask.setShape(false);
                 }
             }
-            else if (mcsTriggerTask.getBcrId().equals("37")){
+            else if(mcsTriggerTask.getBcrId().equals("37")){
                 PlcDriver plcDriver1 = PlcServer.getHoistDriverMap().get("2F_PLC");
                 ResultData data2 = plcDriver1.readBytes("DB11.DBB12", 4);
                 byte[] value2 = (byte[]) data2.getValue();
@@ -124,6 +124,9 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
 
                 ResultData data5 = plcDriver2.readBytes("DB2.DBB19", 1);
                 byte[] value5 = (byte[]) data5.getValue();
+
+                System.out.println(date+"  :  BCRID 46  外形检测  "+new String(value5,"UTF-8")+"\n");
+
                 if(new String(value5,"UTF-8").equals("0")){
                     mcsTriggerTask.setShape(true);
                 }

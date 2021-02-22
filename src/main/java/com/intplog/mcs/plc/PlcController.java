@@ -86,7 +86,9 @@ public class PlcController {
                         eisDistributionDto.setEmpty(0);
                     }
                     JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+                    String mcg2 = eisDistributionDto.toString();
                     String mcg1 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
 
                     System.out.print(date+"  :  111111F  eisDistributionDto  "+eisDistributionDto+"\n");
@@ -152,7 +154,9 @@ public class PlcController {
                     eisDistributionDto.setWeight(mcsTriggerTaskData.getWeight());
                     eisDistributionDto.setShapeInspect(mcsTriggerTaskData.isShape());
                     JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+                    String mcg2 = eisDistributionDto.toString();
                     String mcg1 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
 
                     System.out.print(date+"  :  222222F   "+jsonData+"\n");
@@ -212,7 +216,9 @@ public class PlcController {
                     eisDistributionDto.setWeight(mcsTriggerTaskData.getWeight());
                     eisDistributionDto.setShapeInspect(mcsTriggerTaskData.isShape());
                     JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+                    String mcg2 = eisDistributionDto.toString();
                     String mcg1 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
 
                     System.out.print(date+"  :  333333   "+jsonData+"\n");
@@ -271,7 +277,9 @@ public class PlcController {
                     eisDistributionDto.setWeight(mcsTriggerTaskData.getWeight());
                     eisDistributionDto.setShapeInspect(mcsTriggerTaskData.isShape());
                     JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+                    String mcg2 = eisDistributionDto.toString();
                     String mcg1 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
 
                     System.out.print(date+"  :  333333F   "+jsonData+"\n");
