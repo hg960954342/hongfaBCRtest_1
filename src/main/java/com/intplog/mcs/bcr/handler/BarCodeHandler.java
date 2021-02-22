@@ -101,7 +101,7 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                     mcsTriggerTask.setShape(false);
                 }
             }
-            else if (mcsTriggerTask.getBcrId().equals("37")){
+            else if(mcsTriggerTask.getBcrId().equals("37")){
                 PlcDriver plcDriver1 = PlcServer.getHoistDriverMap().get("2F_PLC");
                 ResultData data2 = plcDriver1.readBytes("DB11.DBB12", 4);
                 byte[] value2 = (byte[]) data2.getValue();
