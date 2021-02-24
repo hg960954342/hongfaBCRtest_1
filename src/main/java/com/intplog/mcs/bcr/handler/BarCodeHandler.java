@@ -87,12 +87,10 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 byte[] value = (byte[]) data.getValue();
                 String weight = String.valueOf(this.bytesToInt(value));
                 mcsTriggerTask.setWeight(weight);
-                System.out.print(date+" 收到 111111 BarCodeHandler ：" + mcsTriggerTask.getWeight() +"\n");
 
                 ResultData data1 = plcDriver.readBytes("DB2.DBB8", 1);
                 byte[] value1 = (byte[]) data1.getValue();
                 String shape = String.valueOf(this.bytesToInt(value1));
-                System.out.print(date+" 收到 111111 BarCodeHandler ：" + shape +"\n");
 
                 if(shape.equals("0")){
                     mcsTriggerTask.setShape(true);
@@ -109,7 +107,9 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
 
                 ResultData data3 = plcDriver1.readBytes("DB2.DBB2", 1);
                 byte[] value3 = (byte[]) data3.getValue();
-                if(new String(value3,"UTF-8").equals("0")){
+                String shape = String.valueOf(this.bytesToInt(value3));
+
+                if(shape.equals("0")){
                     mcsTriggerTask.setShape(true);
                 }
                 else{
@@ -124,10 +124,9 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
 
                 ResultData data5 = plcDriver2.readBytes("DB2.DBB19", 1);
                 byte[] value5 = (byte[]) data5.getValue();
+                String shape = String.valueOf(this.bytesToInt(value5));
 
-                System.out.println(date+"  :  BCRID 46  外形检测  "+new String(value5,"UTF-8")+"\n");
-
-                if(new String(value5,"UTF-8").equals("0")){
+                if(shape.equals("0")){
                     mcsTriggerTask.setShape(true);
                 }
                 else{
@@ -142,7 +141,9 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
 
                 ResultData data7 = plcDriver3.readBytes("DB2.DBB10", 1);
                 byte[] value7 = (byte[]) data7.getValue();
-                if(new String(value7,"UTF-8").equals("0")){
+                String shape = String.valueOf(this.bytesToInt(value7));
+
+                if(shape.equals("0")){
                     mcsTriggerTask.setShape(true);
                 }
                 else{
@@ -157,7 +158,9 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
 
                 ResultData data9 = plcDriver4.readBytes("DB2.DBB10", 1);
                 byte[] value9 = (byte[]) data9.getValue();
-                if(new String(value9,"UTF-8").equals("0")){
+                String shape = String.valueOf(this.bytesToInt(value9));
+
+                if(shape.equals("0")){
                     mcsTriggerTask.setShape(true);
                 }
                 else{
