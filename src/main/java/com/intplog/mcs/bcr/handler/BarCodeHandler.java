@@ -85,6 +85,7 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 PlcDriver plcDriver = PlcServer.getHoistDriverMap().get("1F_PLC");
                 ResultData data = plcDriver.readBytes("DB11.DBB8", 4);
                 byte[] value = (byte[]) data.getValue();
+
                 String weight = String.valueOf(this.bytesToInt(value));
                 mcsTriggerTask.setWeight(weight);
 

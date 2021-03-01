@@ -95,7 +95,7 @@ public class PlcGetByte {
     }
 
     /**
-     * byte数组中取int数值，本方法适用于(低位在后，高位在前)的顺序。和intToBytes2（）配套使用
+     * byte数组中取Dint数值，本方法适用于(低位在后，高位在前)的顺序。和intToBytes2（）配套使用
      */
     public static int bytesToInt32Hight(byte[] src, int offset) {
         int value;
