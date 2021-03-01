@@ -63,7 +63,8 @@ public class PlcController {
                     if(i==30){
                         ResultData data = plcDriver.readBytes("DB2.DBB13", 1);
                         byte[] value = (byte[]) data.getValue();
-                        switch(new String(value,"UTF-8")){
+                        String s = new String(value,"UTF-8");
+                        switch(s){
                             case "0" :
                                 eisDistributionDto.setEmpty(0);
                                 break;
@@ -74,7 +75,8 @@ public class PlcController {
                     else if(i==31){
                         ResultData data1 = plcDriver.readBytes("DB2.DBB14", 1);
                         byte[] value1 = (byte[]) data1.getValue();
-                        switch(new String(value1,"UTF-8")){
+                        String s = new String(value1,"UTF-8");
+                        switch(s){
                             case "0" :
                                 eisDistributionDto.setEmpty(0);
                                 break;

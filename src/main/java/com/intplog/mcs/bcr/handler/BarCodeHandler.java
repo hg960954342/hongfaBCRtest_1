@@ -5,6 +5,7 @@ import com.intplog.mcs.bean.model.McsModel.McsTriggerTask;
 import com.intplog.mcs.common.SpringContextUtil;
 import com.intplog.mcs.plc.PlcDriver;
 import com.intplog.mcs.plc.PlcServer;
+import com.intplog.mcs.plc.common.PlcGetByte;
 import com.intplog.mcs.service.EisService.EisContainerBindService;
 import com.intplog.mcs.service.McsService.McsTriggerTaskService;
 import com.intplog.mcs.utils.StringUtil;
@@ -85,7 +86,7 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 PlcDriver plcDriver = PlcServer.getHoistDriverMap().get("1F_PLC");
                 ResultData data = plcDriver.readBytes("DB11.DBB8", 4);
                 byte[] value = (byte[]) data.getValue();
-                String weight = String.valueOf(this.bytesToInt(value));
+                String weight = String.valueOf(PlcGetByte.bytesToInt32Hight(value,0));
                 mcsTriggerTask.setWeight(weight);
 
                 ResultData data1 = plcDriver.readBytes("DB2.DBB8", 1);
@@ -103,7 +104,8 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 PlcDriver plcDriver1 = PlcServer.getHoistDriverMap().get("2F_PLC");
                 ResultData data2 = plcDriver1.readBytes("DB11.DBB12", 4);
                 byte[] value2 = (byte[]) data2.getValue();
-                mcsTriggerTask.setWeight(String.valueOf(this.bytesToInt(value2)));
+                String weight = String.valueOf(PlcGetByte.bytesToInt32Hight(value2,0));
+                mcsTriggerTask.setWeight(weight);
 
                 ResultData data3 = plcDriver1.readBytes("DB2.DBB2", 1);
                 byte[] value3 = (byte[]) data3.getValue();
@@ -120,7 +122,8 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 PlcDriver plcDriver2 = PlcServer.getHoistDriverMap().get("2F_PLC");
                 ResultData data4 = plcDriver2.readBytes("DB11.DBB8", 4);
                 byte[] value4 = (byte[]) data4.getValue();
-                mcsTriggerTask.setWeight(String.valueOf(this.bytesToInt(value4)));
+                String weight = String.valueOf(PlcGetByte.bytesToInt32Hight(value4,0));
+                mcsTriggerTask.setWeight(weight);
 
                 ResultData data5 = plcDriver2.readBytes("DB2.DBB19", 1);
                 byte[] value5 = (byte[]) data5.getValue();
@@ -137,7 +140,8 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 PlcDriver plcDriver3 = PlcServer.getHoistDriverMap().get("3F_PLC");
                 ResultData data6 = plcDriver3.readBytes("DB11.DBB8", 4);
                 byte[] value6 = (byte[]) data6.getValue();
-                mcsTriggerTask.setWeight(String.valueOf(this.bytesToInt(value6)));
+                String weight = String.valueOf(PlcGetByte.bytesToInt32Hight(value6,0));
+                mcsTriggerTask.setWeight(weight);
 
                 ResultData data7 = plcDriver3.readBytes("DB2.DBB10", 1);
                 byte[] value7 = (byte[]) data7.getValue();
@@ -154,7 +158,8 @@ public class BarCodeHandler extends SimpleChannelInboundHandler<BarCodeData> {
                 PlcDriver plcDriver4 = PlcServer.getHoistDriverMap().get("4F_PLC");
                 ResultData data8 = plcDriver4.readBytes("DB11.DBB8", 4);
                 byte[] value8 = (byte[]) data8.getValue();
-                mcsTriggerTask.setWeight(String.valueOf(this.bytesToInt(value8)));
+                String weight = String.valueOf(PlcGetByte.bytesToInt32Hight(value8,0));
+                mcsTriggerTask.setWeight(weight);
 
                 ResultData data9 = plcDriver4.readBytes("DB2.DBB10", 1);
                 byte[] value9 = (byte[]) data9.getValue();
