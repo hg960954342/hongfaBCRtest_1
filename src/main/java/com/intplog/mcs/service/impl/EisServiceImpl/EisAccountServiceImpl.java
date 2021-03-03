@@ -1,7 +1,7 @@
 package com.intplog.mcs.service.impl.EisServiceImpl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.intplog.mcs.bean.dto.EisDto.EisBoxCheckReply;
+import com.intplog.mcs.bean.dto.EisDto.EisBoxCountReply;
 import com.intplog.mcs.bean.dto.EisDto.EisRequestDto;
 import com.intplog.mcs.bean.dto.EisDto.RespCrossDto;
 import com.intplog.mcs.bean.dto.EisDto.RespDto;
@@ -113,20 +113,20 @@ public class EisAccountServiceImpl implements EisAccountService {
     }
 
     @Override
-    public EisBoxCheckReply eisBoxCheck(Object object) {
+    public EisBoxCountReply eisBoxCount(Object object) {
         try {
             Date begin = new Date();
             String url="wcs/task/emptyContainerDto";
-            EisBoxCheckReply eisBoxCheckReply= this.restTemplate.postForObject(InitDataListener.EIS_URL+url,object,EisBoxCheckReply.class);
+            EisBoxCountReply eisBoxCountReply= this.restTemplate.postForObject(InitDataListener.EIS_URL+url,object,EisBoxCountReply.class);
             Date end = new Date();
-            interfaceLogService.insertInterfaceLog("空箱位请求eis",object,begin,eisBoxCheckReply,end);
-            return  eisBoxCheckReply;
+            interfaceLogService.insertInterfaceLog("空箱位请求eis",object,begin,eisBoxCountReply,end);
+            return  eisBoxCountReply;
         }catch (Exception ex){
             ex.printStackTrace();
-            EisBoxCheckReply eisBoxCheckReply= new EisBoxCheckReply();
-            eisBoxCheckReply.setSuccess(false);
-            eisBoxCheckReply.setMessage(ex.getMessage());
-            return eisBoxCheckReply;
+            EisBoxCountReply eisBoxCountReply= new EisBoxCountReply();
+            eisBoxCountReply.setSuccess(false);
+            eisBoxCountReply.setMessage(ex.getMessage());
+            return eisBoxCountReply;
         }
     }
 

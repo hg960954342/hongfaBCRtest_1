@@ -1,6 +1,6 @@
 package com.intplog.mcs.service.EisService;
 
-import com.intplog.mcs.bean.dto.EisDto.EisBoxCheckReply;
+import com.intplog.mcs.bean.dto.EisDto.EisBoxCountReply;
 import com.intplog.mcs.bean.dto.EisDto.EisRequestDto;
 import com.intplog.mcs.bean.dto.EisDto.RespCrossDto;
 import com.intplog.mcs.bean.dto.EisDto.RespDto;
@@ -32,6 +32,6 @@ public interface EisAccountService {
 
     JsonDataEis eisGrabBit(Object object);
 
-    EisBoxCheckReply eisBoxCheck(Object object);
+    EisBoxCountReply eisBoxCount(Object object);
 
 }

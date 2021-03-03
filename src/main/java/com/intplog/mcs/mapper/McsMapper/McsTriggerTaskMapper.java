@@ -1,6 +1,7 @@
 package com.intplog.mcs.mapper.McsMapper;
 
 import com.intplog.mcs.bean.model.McsModel.McsPlcVariable1;
+import com.intplog.mcs.bean.model.McsModel.McsSlidCount;
 import com.intplog.mcs.bean.model.McsModel.McsTaskInfo;
 import com.intplog.mcs.bean.model.McsModel.McsTriggerTask;
 import org.apache.ibatis.annotations.*;
@@ -27,6 +28,7 @@ public interface McsTriggerTaskMapper {
 
     })
     List<McsTriggerTask> getList(@Param("bcrId") String bcrId, @Param("bcrCode") String bcrCode);
+
     @Select("select * from mcs_trigger_task where bcr_id=#{bcrId}")
     McsTriggerTask getMcsTriggerTaskId(@Param("bcrId") String bcrId);
 

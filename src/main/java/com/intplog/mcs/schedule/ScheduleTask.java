@@ -77,30 +77,12 @@ public class ScheduleTask {
     }
 
     /**
-     * 分拣口2F
+     * 机械臂上报抓取数量
      */
     @Scheduled(cron = "0/1 * * * * ?")
     @Async
-    public void distribution2F(){
-        plcController.Distribution2F();
-    }
-
-    /**
-     * 分拣口3F
-     */
-    @Scheduled(cron = "0/1 * * * * ?")
-    @Async
-    public void distribution3F(){
-        plcController.Distribution3F();
-    }
-
-    /**
-     * 分拣口4F
-     */
-    @Scheduled(cron = "0/1 * * * * ?")
-    @Async
-    public void distribution4F(){
-        plcController.Distribution4F();
+    public void slidCount(){
+        plcController.SlidCount();
     }
 
 

@@ -14,7 +14,7 @@ public class JsonDataEis
 
     /**
      * code :
-     * data : {"bcrId":"","destination":0,"point":""}
+     * data : {"bcrId":"","destination":""}
      * message : 失败消息
      * success : true
      */
@@ -29,12 +29,10 @@ public class JsonDataEis
     public static class DataDTO {
         /**
          * bcrId :
-         * destination : 0
-         * point :
+         * destination :
          */
 
         private String bcrId;
-        private int destination;
-        private String point;
+        private String destination;
     }
 }

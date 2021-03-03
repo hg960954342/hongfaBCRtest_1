@@ -14,20 +14,8 @@ public class EisDistributionDto {
     /**
      * bcrId :
      * barCode :
-     * empty :
-     * shapeInspect : true
-     * shapeInspectDesc :
-     * taskId :
-     * type : 0
-     * weight :
      */
 
     private String bcrId;
     private String barCode;
-    private int empty;;
-    private Boolean shapeInspect;
-    private String shapeInspectDesc;
-    private String taskId;
-    private int type;
-    private String weight;
 }

@@ -34,9 +34,15 @@ public class McsPlcVariable1 {
     public String plcName;
 
     /**
-     * 写值地址
+     * 准备号写值地址
      */
     @Excel(name = "写值地址", width = 15)
-    public String address;
+    public String readyAddress;
+
+    /**
+     * 任务号写值地址
+     */
+    @Excel(name = "写值地址", width = 15)
+    public String forknumAddress;
 
 }

@@ -9,17 +9,18 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @Data
-public class EisBoxCheckDto {
+public class EisBoxCountDto {
 
     /**
-     * bcrId : 31
+     * slidNo : 2
+     * boxCount : 12
+     * actionCount : 1
      */
 
-    private String bcrId;
+    private String slidNo;
 
-    /**
-     * empty : 1
-     */
+    private String boxCount;
 
-    private int empty;
+    private String actionCount;
+
 }

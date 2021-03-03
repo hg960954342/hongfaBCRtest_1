@@ -3,6 +3,7 @@ package com.intplog.mcs.service.impl.McsServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.intplog.mcs.bean.model.McsModel.McsPlcVariable1;
+import com.intplog.mcs.bean.model.McsModel.McsSlidCount;
 import com.intplog.mcs.bean.model.McsModel.McsTriggerTask;
 import com.intplog.mcs.bean.viewmodel.PageData;
 import com.intplog.mcs.mapper.McsMapper.McsTriggerTaskMapper;
