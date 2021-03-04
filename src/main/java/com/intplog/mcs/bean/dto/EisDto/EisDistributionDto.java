@@ -24,7 +24,7 @@ public class EisDistributionDto {
 
     private String bcrId;
     private String barCode;
-    private int empty;;
+    private int empty;
     private Boolean shapeInspect;
     private String shapeInspectDesc;
     private String taskId;
