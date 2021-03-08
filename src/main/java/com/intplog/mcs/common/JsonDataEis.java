@@ -33,6 +33,8 @@ public class JsonDataEis
          */
 
         private String bcrId;
-        private String destination;
+        private int destination;
+        private int stackType;
+
     }
 }

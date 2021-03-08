@@ -61,73 +61,42 @@ public class PlcController {
                     EisDistributionDto eisDistributionDto = new EisDistributionDto();
                     eisDistributionDto.setBcrId(mcsTriggerTaskData.getBcrId());
                     eisDistributionDto.setBarCode(mcsTriggerTaskData.getBcrCode());
-                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
-                    String mcg2 = eisDistributionDto.toString();
-                    String mcg1 = jsonData.toString();
-                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg2, mcsTriggerTaskData.getBcrCode());
+                    String mcg1 = eisDistributionDto.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
-
+                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+                    String mcg2 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     System.out.print(date+"  :  111111F  eisDistributionDto  "+eisDistributionDto+"\n");
                     System.out.print(date+"  :  111111F  jsonData  "+jsonData+"\n");
+                    if(jsonData.getSuccess()){
+                        mcsTriggerTaskData.setStatus(10);
+                        mcsTriggerTaskData.setCreateTime(date);
+                        mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
+                        if(!StringUtils.isEmpty(jsonData.getData())&&jsonData.getData().getBcrId().equals(String.valueOf(i))){
 
-                    if(!StringUtils.isEmpty(jsonData)&&jsonData.getData().getBcrId().equals(String.valueOf(i))){
-                        System.out.print(date+"  :  111111F   wcs下发分拨口指令"+"\n");
-                        String bcrPointValue = jsonData.getData().getDestination();
-                        byte froknum = 0;
-                        if(bcrPointValue.equals("1")){
-                            froknum = 1;
+                            byte path = (byte) jsonData.getData().getDestination();
+                            ResultData data = plcDriver.writeByte(mcsPlcVariable1.getForknumAddress(),path);
+                            byte type = (byte) jsonData.getData().getStackType();
+                            ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getForknumAddress(),type);
+
+
+
+
+                            if(!data.isSuccess()){
+                                String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功";
+                                addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
+                            }
+                            else {
+                                String mcg = "wcs下发分拨口指令到plc失败";
+                                addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
+                                plcDriver.connect=false;
+                            }
                         }
-                        else if(bcrPointValue.equals("2")){
-                            froknum = 2;
-                        }
-                        else if(bcrPointValue.equals("3")){
-                            froknum = 3;
-                        }
-                        else if(bcrPointValue.equals("4")){
-                            froknum = 4;
-                        }
-                        else if(bcrPointValue.equals("5")){
-                            froknum = 5;
-                        }
-                        else if(bcrPointValue.equals("6")){
-                            froknum = 6;
-                        }
-                        else if(bcrPointValue.equals("7")){
-                            froknum = 7;
-                        }
-                        else if(bcrPointValue.equals("8")){
-                            froknum = 8;
-                        }
-                        else if(bcrPointValue.equals("99")){
-                            froknum =99;
-                        }
-                        else  {
-                            froknum = 100;
-                        }
-                        ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getForknumAddress(),froknum);
-                        byte readynum = 1;
-                        ResultData data2 = plcDriver.writeByte(mcsPlcVariable1.getReadyAddress(),readynum);
-                        if(data1.isSuccess()&data2.isSuccess()){
-                            String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"  准备："+readynum+"  指令："+froknum+"到plc成功";
-                            addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
-                            mcsTriggerTaskData.setStatus(10);
-                            mcsTriggerTaskData.setCreateTime(date);
-                            mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
-                            System.out.print(date+"  :  111111F   wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"  准备："+readynum+"  指令："+froknum+"到plc成功"+"\n");
-                        }
-                        else if(!data1.isSuccess()){
-                            String mcg = "wcs下发分拨口指令到plc失败";
-                            addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
-                            plcDriver.connect=false;
-                        }
+                        else continue;
                     }
-                    else if(StringUtils.isEmpty(jsonData)){
-                        continue;
-                    }
+                    else continue;
                 }
-                else if(StringUtils.isEmpty(mcsTriggerTaskData)){
-                    continue;
-                };
+                else continue;
             }
         }catch (Exception ex){
             log.error(String.valueOf(ex));

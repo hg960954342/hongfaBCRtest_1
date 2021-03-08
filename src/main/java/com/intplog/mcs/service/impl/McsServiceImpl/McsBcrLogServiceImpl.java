@@ -52,7 +52,6 @@ public class McsBcrLogServiceImpl implements McsBcrLogService {
     }
 
     public int insertMcsLog(McsBcrLog mcsLog) {
-
         return mcsBcrLogMapper.inserts(mcsLog);
     }
 
