@@ -79,10 +79,12 @@ public class PlcController {
                     else {
                         eisDistributionDto.setEmpty(0);
                     }
-                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
                     String mcg1 = eisDistributionDto.toString();
-                    String mcg2 = jsonData.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
+
+                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+
+                    String mcg2 = jsonData.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
 
                     if(jsonData.getSuccess()){
@@ -97,7 +99,7 @@ public class PlcController {
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                             }
                             else if(!data1.isSuccess()){
-                                String mcg = "wcs下发分拨口指令到plc失败";
+                                String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc失败";
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                                 plcDriver.connect=false;
                             }
@@ -131,12 +133,13 @@ public class PlcController {
                     eisDistributionDto.setBarCode(mcsTriggerTaskData.getBcrCode());
                     eisDistributionDto.setWeight(mcsTriggerTaskData.getWeight());
                     eisDistributionDto.setShapeInspect(mcsTriggerTaskData.isShape());
-                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
                     String mcg1 = eisDistributionDto.toString();
-                    String mcg2 = jsonData.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
-                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
 
+                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+
+                    String mcg2 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     if(jsonData.getSuccess()){
                         mcsTriggerTaskData.setStatus(10);
                         mcsTriggerTaskData.setCreateTime(date);
@@ -149,7 +152,7 @@ public class PlcController {
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                             }
                             else if(!data1.isSuccess()){
-                                String mcg = "wcs下发分拨口指令到plc失败";
+                                String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc失败";
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                                 plcDriver.connect=false;
                             }
@@ -183,10 +186,12 @@ public class PlcController {
                     eisDistributionDto.setBarCode(mcsTriggerTaskData.getBcrCode());
                     eisDistributionDto.setWeight(mcsTriggerTaskData.getWeight());
                     eisDistributionDto.setShapeInspect(mcsTriggerTaskData.isShape());
-                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
                     String mcg1 = eisDistributionDto.toString();
-                    String mcg2 = jsonData.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
+
+                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+
+                    String mcg2 = jsonData.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     if(jsonData.getSuccess()){
                         mcsTriggerTaskData.setStatus(10);
@@ -200,7 +205,7 @@ public class PlcController {
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                             }
                             else if(!data1.isSuccess()){
-                                String mcg = "wcs下发分拨口指令到plc失败";
+                                String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc失败";
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                                 plcDriver.connect=false;
                             }
@@ -234,12 +239,13 @@ public class PlcController {
                     eisDistributionDto.setBarCode(mcsTriggerTaskData.getBcrCode());
                     eisDistributionDto.setWeight(mcsTriggerTaskData.getWeight());
                     eisDistributionDto.setShapeInspect(mcsTriggerTaskData.isShape());
-                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
                     String mcg1 = eisDistributionDto.toString();
-                    String mcg2 = jsonData.toString();
                     addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
-                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
 
+                    JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
+
+                    String mcg2 = jsonData.toString();
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
                     if(jsonData.getSuccess()){
                         mcsTriggerTaskData.setStatus(10);
                         mcsTriggerTaskData.setCreateTime(date);
@@ -252,7 +258,7 @@ public class PlcController {
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                             }
                             else if(!data1.isSuccess()){
-                                String mcg = "wcs下发分拨口指令到plc失败";
+                                String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令到plc失败";
                                 addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                                 plcDriver.connect=false;
                             }

@@ -57,10 +57,10 @@ public class EisAccountServiceImpl implements EisAccountService {
     }
 
     @Override
-    public JsonDataEis eisDistributionReport(Object object) {
+    public JsonDataEis   eisDistributionReport(Object object) {
         try {
             Date begin = new Date();
-            String url="wcs/bcr";
+            String url = "wcs/bcr";
             String s = JSONObject.toJSONString(object);
             log.info("MCS->EIS json: "+s);
             JsonDataEis jsonData= this.restTemplate.postForObject(InitDataListener.EIS_URL+url,s,JsonDataEis.class);
