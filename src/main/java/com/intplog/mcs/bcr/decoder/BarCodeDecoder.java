@@ -37,7 +37,6 @@ public class BarCodeDecoder extends ByteToMessageDecoder {
                     bcd.setWidth(arr[1]);
                     bcd.setHeight(arr[2]);
                 }
-
             }
         }
         in.clear();

@@ -43,6 +43,12 @@ public class McsPlcVariable1 {
      * 任务号写值地址
      */
     @Excel(name = "写值地址", width = 15)
-    public String forknumAddress;
+    public String forkNumAddress;
+
+    /**
+     * 码垛类型写值地址
+     */
+    @Excel(name = "写值地址", width = 15)
+    public String stackTypeAddress;
 
 }

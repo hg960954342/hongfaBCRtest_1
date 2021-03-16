@@ -46,7 +46,7 @@ public class PlcController {
     private McsSlidCountService mcsSlidCountService;
 
 
-    //-------------------业务逻辑-------------------------------
+    //--------------------------业务逻辑-------------------------------
 
     //1F分拣口
     public void Distribution1F(){
@@ -62,33 +62,30 @@ public class PlcController {
                     eisDistributionDto.setBcrId(mcsTriggerTaskData.getBcrId());
                     eisDistributionDto.setBarCode(mcsTriggerTaskData.getBcrCode());
                     String mcg1 = eisDistributionDto.toString();
-                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),date, 1, date, mcg1, mcsTriggerTaskData.getBcrCode());
                     JsonDataEis jsonData = eisAccountService.eisDistributionReport(eisDistributionDto);
                     String mcg2 = jsonData.toString();
-                    addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
-                    System.out.print(date+"  :  111111F  eisDistributionDto  "+eisDistributionDto+"\n");
-                    System.out.print(date+"  :  111111F  jsonData  "+jsonData+"\n");
+                    addPlcLog(mcsTriggerTaskData.getBcrId(),date, 2, date, mcg2, mcsTriggerTaskData.getBcrCode());
+                    System.out.print(date+" :  111111F  eisDistributionDto  "+eisDistributionDto+"\n");
+                    System.out.print(date+" :  111111F  jsonData  "+jsonData+"\n");
                     if(jsonData.getSuccess()){
                         mcsTriggerTaskData.setStatus(10);
                         mcsTriggerTaskData.setCreateTime(date);
                         mcsTriggerTaskService.updateMcsTriggerTaskData(mcsTriggerTaskData);
                         if(!StringUtils.isEmpty(jsonData.getData())&&jsonData.getData().getBcrId().equals(String.valueOf(i))){
-
-                            byte path = (byte) jsonData.getData().getDestination();
-                            ResultData data = plcDriver.writeByte(mcsPlcVariable1.getForknumAddress(),path);
-                            byte type = (byte) jsonData.getData().getStackType();
-                            ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getForknumAddress(),type);
-
-
-
-
-                            if(!data.isSuccess()){
-                                String mcg = "wcs下发分拨口"+mcsTriggerTaskData.getBcrId()+"指令"+path+"到plc成功";
-                                addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 1, date, mcg, mcsTriggerTaskData.getBcrCode());
+                            byte forkNum = (byte) jsonData.getData().getDestination();
+                            ResultData data = plcDriver.writeByte(mcsPlcVariable1.getForkNumAddress(),forkNum);
+                            byte ready = 1;
+                            ResultData data1 = plcDriver.writeByte(mcsPlcVariable1.getReadyAddress(),ready);
+                            byte stackType = (byte) jsonData.getData().getStackType();
+                            ResultData data2 = plcDriver.writeByte(mcsPlcVariable1.getStackTypeAddress(),stackType);
+                            if(data.isSuccess()&&data1.isSuccess()&&data2.isSuccess()){
+                                String mcg = "wcs下发分拨口 : "+mcsTriggerTaskData.getBcrId()+" 路径指令："+forkNum+";类型指令："+stackType+";准备指令："+ready+"到plc成功";
+                                addPlcLog(mcsTriggerTaskData.getBcrId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                             }
                             else {
                                 String mcg = "wcs下发分拨口指令到plc失败";
-                                addPlcLog(mcsTriggerTaskData.getBcrId(),mcsTriggerTaskData.getId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
+                                addPlcLog(mcsTriggerTaskData.getBcrId(),date, 3, date, mcg, mcsTriggerTaskData.getBcrCode());
                                 plcDriver.connect=false;
                             }
                         }
@@ -102,7 +99,7 @@ public class PlcController {
             log.error(String.valueOf(ex));
         }
         long t2 =System.currentTimeMillis();
-        System.out.println(date+"  :  111111F  时间  "+(t2-t1)+"\n");
+        System.out.println(date+":111111F  时间  "+(t2-t1)+"\n");
     }
 
     //1F机械臂上报抓取数量
@@ -127,14 +124,13 @@ public class PlcController {
                     eisBoxCountDto.setBoxCount(boxcount);
                     eisBoxCountDto.setActionCount(actioncount);
                     EisBoxCountReply eisBoxCountReply = eisAccountService.eisBoxCount(eisBoxCountDto);
-
                     mcsSlidCountService.updateMcsSlidCountData(boxcount,actioncount,date);
-                    String mcg2 = eisBoxCountDto.toString();
                     String mcg1 = eisBoxCountReply.toString();
+                    String mcg2 = eisBoxCountDto.toString();
                     String mcg3 = "滑道"+String.valueOf(i);
 
-                    addPlcLog(mcg3,"123",date, 1, date, mcg2, mcsSlidCount.getBoxCount());
-                    addPlcLog(mcg3,"123",date, 1, date, mcg1, mcsSlidCount.getBoxCount());
+                    addPlcLog(mcg3,date, 1, date, mcg1, mcsSlidCount.getBoxCount());
+                    addPlcLog(mcg3,date, 1, date, mcg2, mcsSlidCount.getActionCount());
 
                 }
                 else if(actioncount.equals(mcsSlidCount.getActionCount())){
@@ -153,14 +149,13 @@ public class PlcController {
      * 添加PLC日志
      *
      * @param bcrid
-     * @param taskId
      * @param createTime
      * @param type
      * @param rqTime
      * @param content
      * @param boxNum
      */
-    private void addPlcLog(String bcrid, String taskId,Date createTime, int type, Date rqTime, String content, String boxNum) {
+    private void addPlcLog(String bcrid,Date createTime, int type, Date rqTime, String content, String boxNum) {
         McsPlcLog mcsPlcLog = new McsPlcLog();
         mcsPlcLog.setId(bcrid);
         mcsPlcLog.setTaskId(StringUtil.getUUID32());
